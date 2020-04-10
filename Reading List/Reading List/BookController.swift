@@ -9,8 +9,9 @@
 import Foundation
 
 class BookController {
-    var books: [Book] = []
     
+    var books: [Book]
+
     var readBooks: [Book] {
         return books.filter { $0.hasBeenRead }
     }
@@ -28,6 +29,11 @@ class BookController {
         return booksURL
     }
     
+    init() {
+        books = []
+        loadFromPersistentStore()
+    }
+
     func createBook(title: String, reasonToRead: String) {
         var book = Book(title: title, reasonToRead: reasonToRead)
         books.append(book)
@@ -40,7 +46,7 @@ class BookController {
         }
         saveToPersistentStore()
     }
-    
+
     func updateHasBeenRead(for book: Book) {
         if let bookIndex = books.firstIndex(of: book) {
             books[bookIndex].hasBeenRead = !books[bookIndex].hasBeenRead
@@ -60,10 +66,11 @@ class BookController {
         do {
             
             let encoder = PropertyListEncoder()
-            let booksPlist = try encoder.encode(books)
+            let booksData = try encoder.encode(books)
             guard let readingListURL = readingListURL else { return }
-            try booksPlist.write(to: readingListURL)
+            try booksData.write(to: readingListURL)
             
+            print("saved")
         } catch {
             print("Couldn't save list: \(error)")
         }
@@ -77,6 +84,8 @@ class BookController {
             let decoder = PropertyListDecoder()
             let decodedBooks = try decoder.decode([Book].self, from: booksPlist)
             self.books = decodedBooks
+            
+            print("recovered")
         } catch {
             print("Couldn't load books: \(error)")
         }

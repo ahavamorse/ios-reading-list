@@ -11,11 +11,31 @@ import UIKit
 class BookTableViewCell: UITableViewCell {
 
     @IBOutlet weak var bookTitleLabel: UILabel!
-    @IBOutlet weak var hasBeenReadLabel: UIButton!
-    
+    @IBOutlet weak var hasBeenReadButton: UIButton!
+
+    var delegate: BookTableViewCellDelegate?
+    var book: Book? {
+        didSet {
+            updateViews()
+            
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+//        updateViews()
+    }
+    
+    func updateViews() {
+        if let book = book {
+            bookTitleLabel.text = book.title
+            print(book.title, book.hasBeenRead)
+            if book.hasBeenRead {
+                hasBeenReadButton.imageView?.image = UIImage(named: "checked")
+            } else {
+                hasBeenReadButton.imageView?.image = UIImage(named: "unchecked")
+            }
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,7 +43,9 @@ class BookTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
     @IBAction func hasBeenReadButtonTapped(_ sender: UIButton) {
+        delegate?.toggleHasBeenRead(for: self)
     }
-    
+
 }

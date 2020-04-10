@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="K0E-Zh-C8K" customClass="BookTableViewCell" customModule="Reading_List" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" id="K0E-Zh-C8K" customClass="BookTableViewCell" customModule="Reading_List" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K0E-Zh-C8K" id="kpD-zT-Jdo">
@@ -37,7 +37,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="wMZ-Fm-h9I" secondAttribute="height" multiplier="1:1" constant="10" id="KYn-UV-ffX"/>
                                             </constraints>
-                                            <state key="normal" image="checked"/>
+                                            <state key="normal" image="unchecked"/>
                                             <connections>
                                                 <action selector="hasBeenReadButtonTapped:" destination="K0E-Zh-C8K" eventType="touchUpInside" id="Rf7-Ai-dgB"/>
                                             </connections>
@@ -55,7 +55,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="bookTitleLabel" destination="wFf-RF-c3m" id="pT7-3u-A7N"/>
-                                    <outlet property="hasBeenReadLabel" destination="wMZ-Fm-h9I" id="Plc-qw-oLZ"/>
+                                    <outlet property="hasBeenReadButton" destination="wMZ-Fm-h9I" id="8h6-0j-sgd"/>
                                     <segue destination="jIe-TZ-Fjl" kind="show" identifier="ShowBookDetailSegue" id="sQO-5c-8hx"/>
                                 </connections>
                             </tableViewCell>
@@ -88,20 +88,25 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OvG-VH-eMl">
                                 <rect key="frame" x="20" y="138" width="374" height="224"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xfp-pZ-mEn">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Book Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xfp-pZ-mEn">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oER-za-4RB">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Reason to read: " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oER-za-4RB">
                                         <rect key="frame" x="0.0" y="38" width="374" height="186"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="oER-za-4RB" firstAttribute="top" secondItem="Xfp-pZ-mEn" secondAttribute="bottom" constant="8" id="4Yj-ZG-AQZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="oER-za-4RB" secondAttribute="bottom" id="Bu0-79-AiT"/>
+                                    <constraint firstItem="oER-za-4RB" firstAttribute="leading" secondItem="OvG-VH-eMl" secondAttribute="leading" id="Qpk-9b-Xyl"/>
+                                    <constraint firstAttribute="trailing" secondItem="oER-za-4RB" secondAttribute="trailing" id="Uce-yR-dE8"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -121,7 +126,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bookTitleTextField" destination="Xfp-pZ-mEn" id="393-CM-jo7"/>
+                        <outlet property="bookTitleTextField" destination="Xfp-pZ-mEn" id="7eD-IV-MKf"/>
                         <outlet property="reasonToReadTextView" destination="oER-za-4RB" id="Gmc-Xl-OAH"/>
                     </connections>
                 </viewController>
@@ -149,9 +154,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checked" width="37.5" height="37.5"/>
+        <image name="unchecked" width="37.5" height="37.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="r4X-Qi-sP5"/>
+        <segue reference="sQO-5c-8hx"/>
     </inferredMetricsTieBreakers>
 </document>
