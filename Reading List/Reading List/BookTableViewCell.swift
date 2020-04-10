@@ -31,9 +31,9 @@ class BookTableViewCell: UITableViewCell {
             bookTitleLabel.text = book.title
             print(book.title, book.hasBeenRead)
             if book.hasBeenRead {
-                hasBeenReadButton.imageView?.image = UIImage(named: "checked")
+                hasBeenReadButton.setImage(UIImage(named: "checked"), for: .normal)
             } else {
-                hasBeenReadButton.imageView?.image = UIImage(named: "unchecked")
+                hasBeenReadButton.setImage(UIImage(named: "unchecked"), for: .normal)
             }
         }
     }
